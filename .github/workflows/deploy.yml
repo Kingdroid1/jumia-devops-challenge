@@ -1,11 +1,11 @@
 name: "Infrastructure and application release pipeline"
 
 on:
-  workflow_dispatch:
+  # workflow_dispatch:
 
-  # push:
-  #   branches: [ "main" ]
-  # pull_request:
+  push:
+    branches: [ "main" ]
+ 
 permissions:
   contents: read
   pull-requests: write
