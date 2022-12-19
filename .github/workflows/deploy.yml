@@ -1,4 +1,4 @@
-name: "Cloud infrastructure and application build, deploy pipeline"
+name: "Infrastructure and application release pipeline"
 
 on:
   workflow_dispatch:
