@@ -7,10 +7,10 @@
 # stage 1
 FROM node:16-alpine as builder
 RUN apk add --update yarn
-RUN mkdir /validator-frontend
-WORKDIR /validator-frontend
-COPY . .
-RUN yarn install
+RUN mkdir /app
+WORKDIR /app
+COPY /validator-frontend /app/
+RUN cd validator-frontend && yarn install
 RUN yarn build
 EXPOSE 8081
 
