@@ -9,10 +9,9 @@ FROM node:16-alpine as builder
 RUN apk add --update yarn
 RUN mkdir /validator-frontend
 WORKDIR /validator-frontend
-COPY package.json .
+COPY . .
 COPY yarn.lock .
 RUN yarn install
-COPY . .
 RUN yarn build
 EXPOSE 8081
 
