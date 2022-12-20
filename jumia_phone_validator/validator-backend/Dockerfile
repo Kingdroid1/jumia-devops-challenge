@@ -2,12 +2,11 @@
 # COPY target/validator-0.0.1.jar backend-validator-0.0.1.jar
 # ENTRYPOINT ["java","-jar","/backend-validator-0.0.1.jar"]
 
+# stage 1
 FROM maven:3.6.0-jdk-11-slim AS build
 WORKDIR /validator-backend
 COPY ./jumia_phone_validator/validator-backend /validator-backend/
-RUN pwd && ls
 RUN mvn clean install
-RUN pwd && ls
 
 
 # stage 2
