@@ -10,7 +10,6 @@ RUN apk add --update yarn
 RUN mkdir /validator-frontend
 WORKDIR /validator-frontend
 COPY . .
-COPY yarn.lock .
 RUN yarn install
 RUN yarn build
 EXPOSE 8081
