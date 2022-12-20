@@ -9,8 +9,9 @@ FROM node:16-alpine as builder
 RUN apk add --update yarn
 RUN mkdir /app
 WORKDIR /app
-COPY /validator-frontend /app/
-RUN cd validator-frontend && yarn install
+COPY . /app/
+RUN pwd && ls
+RUN yarn install
 RUN yarn build
 EXPOSE 8081
 
@@ -18,5 +19,5 @@ EXPOSE 8081
 FROM nginx:1.14.2-alpine
 WORKDIR /usr/share/nginx/html
 RUN rm -rf ./*
-COPY --from=builder /validator-frontend/build .
+COPY --from=builder /app/build .
 ENTRYPOINT [ "nginx", "-g", "daemon off;" ]
