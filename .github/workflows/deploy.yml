@@ -1,4 +1,4 @@
-name: "Infrastructure and application release pipeline"
+name: "Application release pipeline"
 
 on:
   workflow_dispatch:
