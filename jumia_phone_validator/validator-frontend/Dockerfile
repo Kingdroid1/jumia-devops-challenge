@@ -5,7 +5,7 @@
 # CMD ["serve", "-s", "-l", "8081"]
 
 # stage 1
-FROM node:16-alpine as builder
+FROM node:16-alpine AS builder
 RUN apk add --update yarn
 RUN mkdir /app
 WORKDIR /app
