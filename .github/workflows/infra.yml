@@ -6,9 +6,6 @@ on:
   # push:
   #   branches: ["infra"]
 
-  push:
-    branches: ["main"]
-
 permissions:
   contents: read
   pull-requests: write
