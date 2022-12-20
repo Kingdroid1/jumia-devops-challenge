@@ -11,12 +11,11 @@ permissions:
   pull-requests: write
 
 jobs:
-  
   build-push-frontend:
     runs-on: ubuntu-latest
     environment: production
 
-  # Use the Bash shell
+    # Use the Bash shell
     defaults:
       run:
         shell: bash
@@ -90,5 +89,3 @@ jobs:
           docker build -f ./jumia_phone_validator/validator-backend/Dockerfile -t $ECR_REGISTRY/$REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$REPOSITORY:$IMAGE_TAG
           echo "image=$ECR_REGISTRY/$REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
-
-  
