@@ -65,8 +65,8 @@ data "aws_subnet_ids" "private_subnets" {
     # availability_zone = slice(data.aws_availability_zones.available.names,0,4)
 
     tags = {
-      "kubernetes.io/cluster/${aws_eks_cluster.jumia.name}" = "shared"
-      "kubernetes.io/role/internal-elb"                     = 1
+      "kubernetes.io/cluster/jumia-prod" = "shared"
+      "kubernetes.io/role/internal-elb"  = 1
     }
 }
 
