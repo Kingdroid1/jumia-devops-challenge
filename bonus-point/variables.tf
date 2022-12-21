@@ -20,12 +20,12 @@ variable "priv-subnet-2" {
 }
 variable "pub_cidr_block" {
     type = string
-    default = "10.0.7.0/24"
+    default = "10.0.9.0/24"
 }
 
 variable "priv_cidr_block" {
     type = string
-    default = "10.0.10.0/24"
+    default = "10.0.8.0/24"
 }
 
 variable "cidrs" {
