@@ -13,4 +13,4 @@ RUN mvn clean install
 FROM openjdk:8-jdk-alpine
 WORKDIR /app
 COPY --from=build /validator-backend/target/validator-0.0.1.jar  /app/validator-0.0.1.jar
-ENTRYPOINT ["java","-jar","/validator-0.0.1.jar"]
+ENTRYPOINT ["java","-jar","/app/validator-0.0.1.jar"]
