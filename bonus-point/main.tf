@@ -60,16 +60,17 @@ data "aws_vpc" "selected" {
 
 data "aws_subnet" "private-subnets" {
     vpc_id = var.vpc_id
+    count = 2
     tags = {
       "Name" = "private-subnets"
     }
 }
 
 resource "aws_subnet" "priv_subs" {
-    count = 3
+    count = 2
     vpc_id = var.vpc_id
     cidr_block        = var.priv_cidr_block
-    availability_zone = slice(data.aws_availability_zones.available.names,0,3)
+    availability_zone = slice(data.aws_availability_zones.available.names,0)
 
     tags = {
       "kubernetes.io/cluster/jumia-prod" = "shared"
@@ -77,10 +78,10 @@ resource "aws_subnet" "priv_subs" {
     }
 }
 resource "aws_subnet" "public_subnet" {
-    count = 3
+    count = 2
     vpc_id = data.aws_vpc.selected.id
     cidr_block        = var.pub_cidr_block
-    availability_zone = slice(data.aws_availability_zones.available.names,0,3)
+    availability_zone = slice(data.aws_availability_zones.available.names,0)
 
     tags = {
        "kubernetes.io/cluster/jumia-prod" = "shared"
