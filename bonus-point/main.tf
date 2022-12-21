@@ -39,7 +39,7 @@ resource "aws_eks_cluster" "jumia" {
   role_arn = aws_iam_role.cluster_iam.arn
 
   vpc_config {
-    subnet_ids = [data.aws_subnet.private-subnets[*].id]
+    subnet_ids = [data.aws_subnet.private-subnets[0].id, data.aws_subnet.private-subnets[1].id]
   }
 
   depends_on = [
@@ -60,7 +60,6 @@ data "aws_vpc" "selected" {
 
 data "aws_subnet" "private-subnets" {
     vpc_id = var.vpc_id
-    count = 1
     tags = {
       "Name" = "private-subnets"
     }
@@ -170,7 +169,7 @@ resource "aws_eks_node_group" "cluster_node_group" {
   cluster_name    = aws_eks_cluster.jumia.name
   node_group_name = "cluster_node_group"
   node_role_arn   = aws_iam_role.node_group_role.arn
-  subnet_ids      = [data.aws_subnet.private-subnets[*].id]
+  subnet_ids      = [data.aws_subnet.private-subnets[0].id, data.aws_subnet.private-subnets[1].id]
   instance_types = ["m5.large"]
 
   scaling_config {
