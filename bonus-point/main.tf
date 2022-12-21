@@ -58,12 +58,12 @@ data "aws_vpc" "selected" {
   id = var.vpc_id
 }
 
-data "aws_subnet" "selected" {
-    vpc_id = var.vpc_id
-    tags = {
-      "Name" = "private-subnets"
-    }
-}
+# data "aws_subnet" "selected" {
+#     vpc_id = var.vpc_id
+#     tags = {
+#       "Name" = "private-subnets"
+#     }
+# }
 
 resource "aws_subnet" "priv_subs" {
     count = 2
@@ -169,7 +169,7 @@ resource "aws_eks_node_group" "cluster_node_group" {
   cluster_name    = aws_eks_cluster.jumia.name
   node_group_name = "cluster_node_group"
   node_role_arn   = aws_iam_role.node_group_role.arn
-  subnet_ids      = [for s in data.aws_subnet.selected : s.id]
+  subnet_ids      = [var.priv-subnet-1, var.priv-subnet-2]
   instance_types = ["m5.large"]
 
   scaling_config {
