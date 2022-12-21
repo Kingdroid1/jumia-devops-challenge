@@ -39,7 +39,7 @@ resource "aws_eks_cluster" "jumia" {
   role_arn = aws_iam_role.cluster_iam.arn
 
   vpc_config {
-    subnet_ids = [data.aws_subnet.private_subnets.ids]
+    subnet_ids = [data.aws_subnet.private_subnets.id]
   }
 
   depends_on = [
