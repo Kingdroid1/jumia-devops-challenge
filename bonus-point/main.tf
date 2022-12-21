@@ -39,7 +39,7 @@ resource "aws_eks_cluster" "jumia" {
   role_arn = aws_iam_role.cluster_iam.arn
 
   vpc_config {
-    subnet_ids = [data.aws_subnet.private_subnets[*].id]
+    subnet_ids = [data.aws_subnet_ids.private_subnets.ids]
   }
 
   depends_on = [
@@ -54,11 +54,13 @@ resource "aws_eks_cluster" "jumia" {
 data "aws_availability_zones" "available" {
     state = "available"
 }
-data "aws_vpc" "prod_vpc" {}
+data "aws_vpc" "selected" {
+  id = var.vpc_id
+}
 
-data "aws_subnet" "private_subnets" {
+data "aws_subnet_ids" "private_subnets" {
     # count = 3
-    # vpc_id = data.aws_vpc.prod_vpc.id
+    vpc_id = var.vpc_id
     # cidr_block        = ["10.0.4.0/24", "10.0.5.0/24", "10.0.6.0/24"]
     # availability_zone = slice(data.aws_availability_zones.available.names,0,4)
 
