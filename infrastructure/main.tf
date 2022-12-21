@@ -389,7 +389,7 @@ resource "aws_lb_listener_rule" "http" {
 
   condition {
     host_header {
-      values = ["jumia.com"]
+      values = ["tizok8s.com"]
     }
   }
 }
