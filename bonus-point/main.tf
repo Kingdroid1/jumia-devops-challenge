@@ -70,7 +70,7 @@ resource "aws_subnet" "priv_subs" {
     count = 2
     vpc_id = var.vpc_id
     cidr_block        = var.priv_cidr_block
-    availability_zone = slice(data.aws_availability_zones.available.names,0)
+    availability_zone = slice(data.aws_availability_zones.available.names,0,1)
 
     tags = {
       "kubernetes.io/cluster/jumia-prod" = "shared"
@@ -81,7 +81,7 @@ resource "aws_subnet" "public_subnet" {
     count = 2
     vpc_id = data.aws_vpc.selected.id
     cidr_block        = var.pub_cidr_block
-    availability_zone = slice(data.aws_availability_zones.available.names,0)
+    availability_zone = slice(data.aws_availability_zones.available.names,0,1)
 
     tags = {
        "kubernetes.io/cluster/jumia-prod" = "shared"
