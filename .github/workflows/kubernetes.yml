@@ -1,11 +1,11 @@
 name: "Kubernetes infrastructure release pipeline"
 
 on:
-  # workflow_dispatch:
+  workflow_dispatch:
 
   # push:
   #   branches: ["kubernetes"]
-  pull_request: ["kubernetes"]
+  # pull_request:
 
 permissions:
   contents: read
