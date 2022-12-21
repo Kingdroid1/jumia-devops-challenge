@@ -72,7 +72,7 @@ data "aws_subnet_ids" "private_subnets" {
 
 resource "aws_subnet" "public_subnets" {
     count = 3
-    vpc_id = data.aws_vpc.prod_vpc.id
+    vpc_id = data.aws_vpc.selected.id
     cidr_block        = ["10.0.7.0/24", "10.0.8.0/24", "10.0.9.0/24"]
     availability_zone = slice(data.aws_availability_zones.available.names,0,4)
 
