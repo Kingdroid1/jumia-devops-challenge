@@ -5,7 +5,6 @@ on:
 
   # push:
   #   branches: ["kubernetes"]
-  # pull_request:
 
 permissions:
   contents: read
