@@ -12,5 +12,14 @@ variable "vpc_id" {
 variable "pub_cidr_block" {
     type = string
     default = "10.0.7.0/24"
-  
+}
+
+variable "priv_cidr_block" {
+    type = string
+    default = "10.0.4.0/24"
+}
+
+variable "cidrs" {
+    type = list()
+    default = ["10.0.4.0/24", "10.0.5.0/24", "10.0.6.0/24"]
 }
