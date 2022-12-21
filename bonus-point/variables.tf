@@ -9,6 +9,15 @@ variable "vpc_id" {
     default = "vpc-066a0ca5f533422b1"
 }
 
+variable "priv-subnet-1" {
+    type = string
+    default = "subnet-02d95f90ac08de832" 
+}
+
+variable "priv-subnet-2" {
+    type = string
+    default = "subnet-047af3185e0e62d4b" 
+}
 variable "pub_cidr_block" {
     type = string
     default = "10.0.7.0/24"
