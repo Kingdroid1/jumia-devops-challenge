@@ -34,6 +34,17 @@ resource "aws_iam_role_policy_attachment" "AmazonEKSVPCResourceController" {
   role       = aws_iam_role.cluster_iam.name
 }
 
+resource "aws_subnet" "private_subnets" {
+    count = 3
+    vpc_id = data.aws_vpc.prod_vpc.id
+    cidr_block        = ["10.0.4.0/24", "10.0.5.0/24", "10.0.6.0/24"]
+    availability_zone = slice(data.aws_availability_zones.available.names,0,4)
+
+    tags = {
+      "kubernetes.io/cluster/${aws_eks_cluster.jumia}" = "shared"
+      "kubernetes.io/role/internal-elb"                 = 1
+    }
+}
 resource "aws_eks_cluster" "jumia" {
   name     = "jumia-prod"
   role_arn = aws_iam_role.cluster_iam.arn
@@ -56,18 +67,6 @@ data "aws_availability_zones" "available" {
     state = "available"
 }
 data "aws_vpc" "prod_vpc" {}
-
-resource "aws_subnet" "private_subnets" {
-    count = 3
-    vpc_id = data.aws_vpc.prod_vpc.id
-    cidr_block        = ["10.0.4.0/24", "10.0.5.0/24", "10.0.6.0/24"]
-    availability_zone = slice(data.aws_availability_zones.available.names,0,4)
-
-    tags = {
-      "kubernetes.io/cluster/${aws_eks_cluster.jumia}" = "shared"
-      "kubernetes.io/role/internal-elb"                 = 1
-    }
-}
 
 resource "aws_subnet" "public_subnets" {
     count = 3
