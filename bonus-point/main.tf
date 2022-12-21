@@ -39,7 +39,7 @@ resource "aws_eks_cluster" "jumia" {
   role_arn = aws_iam_role.cluster_iam.arn
 
   vpc_config {
-    subnet_ids = [data.aws_subnet_ids.private_subnets.ids]
+    subnet_ids = [data.aws_subnet.private_subnets.ids]
   }
 
   depends_on = [
@@ -58,7 +58,7 @@ data "aws_vpc" "selected" {
   id = var.vpc_id
 }
 
-data "aws_subnet_ids" "private_subnets" {
+data "aws_subnet" "private_subnets" {
     # count = 3
     vpc_id = var.vpc_id
     # cidr_block        = ["10.0.4.0/24", "10.0.5.0/24", "10.0.6.0/24"]
@@ -70,15 +70,15 @@ data "aws_subnet_ids" "private_subnets" {
     }
 }
 
-resource "aws_subnet" "public_subnets" {
+resource "aws_subnet" "public_subnet" {
     count = 3
     vpc_id = data.aws_vpc.selected.id
-    cidr_block        = ["10.0.7.0/24", "10.0.8.0/24", "10.0.9.0/24"]
+    cidr_block        = var.pub_cidr_block
     availability_zone = slice(data.aws_availability_zones.available.names,0,4)
 
     tags = {
-       "kubernetes.io/cluster/${aws_eks_cluster.jumia.name}" = "shared"
-       "kubernetes.io/role/elb"                              = 1
+       "kubernetes.io/cluster/jumia-prod" = "shared"
+       "kubernetes.io/role/elb"           = 1
     }
 }
 
@@ -163,7 +163,7 @@ resource "aws_eks_node_group" "cluster_node_group" {
   cluster_name    = aws_eks_cluster.jumia.name
   node_group_name = "cluster_node_group"
   node_role_arn   = aws_iam_role.node_group_role.name.arn
-  subnet_ids      = aws_subnet.private_subnets[*].id
+  subnet_ids      = [data.aws_subnet.private_subnets[*].id]
   instance_types = "m5.large"
 
   scaling_config {

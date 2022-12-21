@@ -8,3 +8,9 @@ variable "vpc_id" {
     type = string
     default = "vpc-066a0ca5f533422b1"
 }
+
+variable "pub_cidr_block" {
+    type = string
+    default = "10.0.7.0/24"
+  
+}
