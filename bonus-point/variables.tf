@@ -18,6 +18,11 @@ variable "priv-subnet-2" {
     type = string
     default = "subnet-047af3185e0e62d4b" 
 }
+
+variable "priv-subnet-3" {
+    type = string
+    default = "subnet-0ee9cb2c26d14dc3f" 
+}
 variable "pub_cidr_block" {
     type = string
     default = "10.0.9.0/24"

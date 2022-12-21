@@ -39,7 +39,7 @@ resource "aws_eks_cluster" "jumia" {
   role_arn = aws_iam_role.cluster_iam.arn
 
   vpc_config {
-    subnet_ids = [var.priv-subnet-1, var.priv-subnet-2]
+    subnet_ids = [var.priv-subnet-1, var.priv-subnet-2, var.priv-subnet-3]
   }
 
   depends_on = [
@@ -65,28 +65,28 @@ data "aws_vpc" "selected" {
 #     }
 # }
 
-resource "aws_subnet" "priv_subs" {
-    count = 2
-    vpc_id = var.vpc_id
-    cidr_block        = var.priv_cidr_block
-    availability_zone = data.aws_availability_zones.available.names[0]
+# resource "aws_subnet" "priv_subs" {
+#     count = 2
+#     vpc_id = var.vpc_id
+#     cidr_block        = var.priv_cidr_block
+#     availability_zone = data.aws_availability_zones.available.names[0]
 
-    tags = {
-      "kubernetes.io/cluster/jumia-prod" = "shared"
-      "kubernetes.io/role/internal-elb"  = 1
-    }
-}
-resource "aws_subnet" "public_subnet" {
-    count = 2
-    vpc_id = data.aws_vpc.selected.id
-    cidr_block        = var.pub_cidr_block
-    availability_zone = data.aws_availability_zones.available.names[0]
+#     tags = {
+#       "kubernetes.io/cluster/jumia-prod" = "shared"
+#       "kubernetes.io/role/internal-elb"  = 1
+#     }
+# }
+# resource "aws_subnet" "public_subnet" {
+#     count = 2
+#     vpc_id = data.aws_vpc.selected.id
+#     cidr_block        = var.pub_cidr_block
+#     availability_zone = data.aws_availability_zones.available.names[0]
 
-    tags = {
-       "kubernetes.io/cluster/jumia-prod" = "shared"
-       "kubernetes.io/role/elb"           = 1
-    }
-}
+#     tags = {
+#        "kubernetes.io/cluster/jumia-prod" = "shared"
+#        "kubernetes.io/role/elb"           = 1
+#     }
+# }
 
 ###############################################################
 # cluster AddON resource (vpc-cni) - optional but recommended
@@ -169,7 +169,7 @@ resource "aws_eks_node_group" "cluster_node_group" {
   cluster_name    = aws_eks_cluster.jumia.name
   node_group_name = "cluster_node_group"
   node_role_arn   = aws_iam_role.node_group_role.arn
-  subnet_ids      = [var.priv-subnet-1, var.priv-subnet-2]
+  subnet_ids      = [var.priv-subnet-1, var.priv-subnet-2, var.priv-subnet-3]
   instance_types = ["m5.large"]
 
   scaling_config {
