@@ -43,7 +43,7 @@ jobs:
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           REPOSITORY: ${{ env.ECR_REPOSITORY }}
-          IMAGE_TAG: validator-frontend-${{ github.sha }}
+          IMAGE_TAG: validator-frontend
 
         run: |
           docker build -f ./jumia_phone_validator/validator-frontend/Dockerfile -t $ECR_REGISTRY/$REPOSITORY:$IMAGE_TAG .
@@ -83,7 +83,7 @@ jobs:
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           REPOSITORY: ${{ env.ECR_REPOSITORY }}
-          IMAGE_TAG: validator-backend-${{ github.sha }}
+          IMAGE_TAG: validator-backend
 
         run: |
           docker build -f ./jumia_phone_validator/validator-backend/Dockerfile -t $ECR_REGISTRY/$REPOSITORY:$IMAGE_TAG .
@@ -125,9 +125,9 @@ jobs:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: ${{ env.ECR_REPOSITORY }}
-          IMAGE_TAG: validator-backend-${{ github.sha }}
+          IMAGE_TAG: validator-backend
         with:
-          args: cat $GITHUB_WORKSPACE/bonus-point/manifests/deployment.yml | sed "s/{{github.sha}}/${{ github.sha }}/g" | kubectl apply -f -
+          args: kubectl apply -f ./bonus-point/manifests/deployment.yml
 
         # set image deployment/$ECR_REPOSITORY $ECR_REPOSITORY=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
