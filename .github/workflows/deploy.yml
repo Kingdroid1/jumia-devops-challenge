@@ -131,6 +131,6 @@ jobs:
 
         # set image deployment/$ECR_REPOSITORY $ECR_REPOSITORY=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
-        run: |
-          pwd && ls
-          cat $GITHUB_WORKSPACE/bonus-point/manifests/deployment.yml | sed "s/{{github.sha}}/${{ github.sha }}/g" | kubectl apply -f -
+        # run: |
+        #   pwd && ls
+        #   cat $GITHUB_WORKSPACE/bonus-point/manifests/deployment.yml | sed "s/{{github.sha}}/${{ github.sha }}/g" | kubectl apply -f -
