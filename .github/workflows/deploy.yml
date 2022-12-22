@@ -124,10 +124,12 @@ jobs:
         env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: jumia-devops
-          IMAGE_TAG: ${{ github.sha }}
-        # with:
-        #   args: set image deployment/$ECR_REPOSITORY $ECR_REPOSITORY=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          ECR_REPOSITORY: ${{ env.ECR_REPOSITORY }}
+          IMAGE_TAG: validator-backend-${{ github.sha }}
+        with:
+          args: cat $GITHUB_WORKSPACE/bonus-point/manifests/deployment.yml | sed "s/{{github.sha}}/${{ github.sha }}/g" | kubectl apply -f -
+
+        # set image deployment/$ECR_REPOSITORY $ECR_REPOSITORY=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
         run: |
           pwd && ls
