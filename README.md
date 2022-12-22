@@ -1,5 +1,5 @@
 # jumia-devops-challenge
-### About this project
+## About this project
 <p>
 This repository contains all the required application code, infrastructure code and configuration code to seamlessly automate <br/>
    Infrastructure provision, configuration and application containers deployments within the AWS cloud platform. <br/>
@@ -10,4 +10,4 @@ This repository contains all the required application code, infrastructure code 
 ## Acknowledgement
 <p>The Jumia team <i class="fa-solid fa-heart"></i></p>
 
-With <i class="fa-solid fa-heart"></i> from moi
+With <FontAwesomeIcon icon="fa-solid fa-heart" /> from moi
