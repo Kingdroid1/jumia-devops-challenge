@@ -32,7 +32,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: k8s-svc
+  name: backend-svc
   namespace: production
 spec:
   type: NodePort
