@@ -1,4 +1,4 @@
-# jumia-devops-challenge
+# The Jumia devops challenge
 ## About this project
 <p>
 This repository contains all the required application code, infrastructure code and configuration code to seamlessly automate <br/>
