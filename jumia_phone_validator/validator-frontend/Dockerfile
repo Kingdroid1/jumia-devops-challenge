@@ -13,7 +13,7 @@ COPY ./jumia_phone_validator/validator-frontend /app/
 RUN pwd && ls
 RUN yarn install
 RUN yarn build
-EXPOSE 8081
+EXPOSE 3000
 
 # Stage 2
 FROM nginx:1.14.2-alpine
