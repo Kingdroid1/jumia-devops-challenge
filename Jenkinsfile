@@ -4,9 +4,12 @@ pipeline {
         skipStagesAfterUnstable()
     }
     stages{
-        stage('Deploy'){
+        stage('Deploy Backend'){
             steps {
-                 sh 'kubectl apply -f backend.yml',
+                 sh 'kubectl apply -f backend.yml'
+            }
+        stage('Deploy Frontend')
+            steps {
                  sh 'kubectl apply -f frontend.yml'
             }
         }
