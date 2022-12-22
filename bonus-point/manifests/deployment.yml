@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: validator-backend
-          image: 992122884453.dkr.ecr.eu-central-1.amazonaws.com/jumia-devops:validator-backend-50427f6b57493d814963c52694e9de911cde68cc
+          image: 992122884453.dkr.ecr.eu-central-1.amazonaws.com/jumia-devops:validator-backend-{{github.sha}}
           resources:
             limits:
               memory: "1000Mi"
