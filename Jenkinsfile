@@ -8,11 +8,13 @@ pipeline {
             steps {
                  sh 'kubectl apply -f backend.yml'
             }
-        stage('Deploy Frontend')
+        }
+        stage('Deploy Frontend'){
             steps {
                  sh 'kubectl apply -f frontend.yml'
             }
         }
+            
     }
         
 }
