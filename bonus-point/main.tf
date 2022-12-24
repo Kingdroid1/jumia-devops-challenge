@@ -58,36 +58,6 @@ data "aws_vpc" "selected" {
   id = var.vpc_id
 }
 
-# data "aws_subnet" "selected" {
-#     vpc_id = var.vpc_id
-#     tags = {
-#       "Name" = "private-subnets"
-#     }
-# }
-
-# resource "aws_subnet" "priv_subs" {
-#     count = 2
-#     vpc_id = var.vpc_id
-#     cidr_block        = var.priv_cidr_block
-#     availability_zone = data.aws_availability_zones.available.names[0]
-
-#     tags = {
-#       "kubernetes.io/cluster/jumia-prod" = "shared"
-#       "kubernetes.io/role/internal-elb"  = 1
-#     }
-# }
-# resource "aws_subnet" "public_subnet" {
-#     count = 2
-#     vpc_id = data.aws_vpc.selected.id
-#     cidr_block        = var.pub_cidr_block
-#     availability_zone = data.aws_availability_zones.available.names[0]
-
-#     tags = {
-#        "kubernetes.io/cluster/jumia-prod" = "shared"
-#        "kubernetes.io/role/elb"           = 1
-#     }
-# }
-
 ###############################################################
 # cluster AddON resource (vpc-cni) - optional but recommended
 ###############################################################
