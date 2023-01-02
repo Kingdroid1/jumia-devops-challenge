@@ -49,7 +49,6 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.AWS_REGION }}
           cluster-name: ${{ env.EKS_CLUSTER }}
-          config-files: .github/values/dev.yaml
           namespace: ${{ env.NAMESPACE }}
           name: backend
           chart-path: "./bonus-point/manifests/helm/backend"
