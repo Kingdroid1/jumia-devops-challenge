@@ -14,7 +14,6 @@ jobs:
   
   release-backend:
     runs-on: ubuntu-latest
-    needs: build-push-backend
     environment: production
 
     # Use the Bash shell
