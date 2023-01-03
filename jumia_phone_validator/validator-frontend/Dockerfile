@@ -10,7 +10,6 @@ RUN apk add --update yarn
 RUN mkdir /app
 WORKDIR /app
 COPY ./jumia_phone_validator/validator-frontend /app/
-RUN pwd && ls
 RUN yarn install
 RUN yarn build
 
@@ -18,6 +17,5 @@ RUN yarn build
 FROM nginx:1.14.2-alpine
 COPY --from=builder /app/build /usr/share/nginx/html
 COPY --from=builder /app/nginx.conf /etc/nginx/conf.d/default.conf
-RUN pwd && ls
 EXPOSE 80
 CMD [ "nginx", "-g", "daemon off;" ]
