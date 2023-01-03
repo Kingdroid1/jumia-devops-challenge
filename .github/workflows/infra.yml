@@ -1,10 +1,10 @@
 name: "Infrastructure release pipeline"
 
 on:
-  workflow_dispatch:
+#   workflow_dispatch:
 
-  # push:
-  #   branches: ["infra"]
+  push:
+    branches: ["infra"]
 
 permissions:
   contents: read
